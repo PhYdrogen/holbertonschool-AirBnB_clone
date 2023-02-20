@@ -10,7 +10,7 @@ class FileStorage:
     save
     reload
     """
-    def __init__(self, file, obj):
+    def __init__(self, file = None, obj = None):
         self.__file_path = file
         self.__objects = obj
         
