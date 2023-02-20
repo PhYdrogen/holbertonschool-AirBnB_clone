@@ -8,9 +8,14 @@ class BaseModel:
     
     def __init__(self, *args, **kwargs):
         """ init """
-        self.id = str(uuid.uuid4())
-        self.created_at = self.getDate()
-        self.updated_at = self.getDate()
+        if kwargs is not None or len(kwargs) > 0:
+            self.id = kwargs.get("id", self.getID())
+            self.created_at = kwargs.get("created_at",  self.getDate())
+            self.updated_at = kwargs.get("updated_at",  self.getDate())
+        elif len(args) < 1:
+            self.id = self.getID()
+            self.created_at = self.getDate()
+            self.updated_at = self.getDate()
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__})]"
@@ -29,3 +34,6 @@ class BaseModel:
     def getDate():
         chaine = datetime.now().isoformat()
         return datetime.fromisoformat(chaine)
+    @staticmethod
+    def getID():
+        return str(uuid.uuid4())
