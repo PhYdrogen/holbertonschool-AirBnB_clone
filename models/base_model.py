@@ -1,6 +1,7 @@
 """ BASE MODEL CLASS """
 import uuid
 from datetime import datetime
+from models import storage
 
 class BaseModel:
     """" Class basemodel """
@@ -16,11 +17,14 @@ class BaseModel:
             self.id = self.getID()
             self.created_at = self.getDate()
             self.updated_at = self.getDate()
+        
+        storage.new(self.to_dict())
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__})]"
     
     def save(self):
+        storage.save()
         self.update_at = self.getDate()
     
     def to_dict(self):
