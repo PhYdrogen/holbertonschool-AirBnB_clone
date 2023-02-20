@@ -1,7 +1,6 @@
 """ BASE MODEL CLASS """
 import uuid
-import datetime
-#from datetime import datetime
+from datetime import datetime
 
 class BaseModel:
     """" Class basemodel """
@@ -10,7 +9,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """ init """
         self.id = str(uuid.uuid4())
-        self.create_at = self.getDate()
+        self.created_at = self.getDate()
         self.update_at = self.getDate()
 
     def __str__(self):
@@ -21,10 +20,9 @@ class BaseModel:
     
     def to_dict(self):
         return self.__dict__
+        #new_dict["__class__"] = self.__class__.__name__
+        #return new_dict
     
     @staticmethod
     def getDate():
-        #return datetime.now().isoformat()
         return datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
-    
-    
