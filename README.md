@@ -18,5 +18,5 @@ La problématique est de trouver un mot ou une phrase et de faire le chemin le p
 
 ## 👦 Authors
 
-- [@Redginald Godeau](https://github.com/RedginaldGodeau
+- [@RedginaldGodeau](https://github.com/RedginaldGodeau
 - [@PhYdrogen](https://github.com/PhYdrogen)
