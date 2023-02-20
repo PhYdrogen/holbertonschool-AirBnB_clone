@@ -16,7 +16,4 @@ La problématique est de trouver un mot ou une phrase et de faire le chemin le p
 ## ⌨️ Exemple de comment l'utiliser
 
 
-## 👦 Authors
 
-- [@RedginaldGodeau](https://github.com/RedginaldGodeau
-- [@PhYdrogen](https://github.com/PhYdrogen)
