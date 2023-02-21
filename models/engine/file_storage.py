@@ -28,6 +28,6 @@ class FileStorage:
     def reload(self):
         if not os.path.exists(self.__class__.__file_path):
             return
-        with open(self.__class__.__file_path, "r", encoding="utf-8") as f: 
+        with open(self.__class__.__file_path, "r", encoding="utf-8") as f:
             self.__class__.__objects = json.load(f)
         f.close()
