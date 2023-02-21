@@ -21,10 +21,7 @@ class FileStorage:
         for k, o in obj.items():
                 if (not isinstance(o, str)):
                     obj[k] = str(obj[k]) 
-        print(o)
-                
-                
-        
+                    
         self.__class__.__objects["{}.{}".format(obj["__class__"], obj["id"])] = obj
         
     def save(self):
