@@ -22,8 +22,9 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__})]"
     
     def save(self):
+        storage.new(self)
         storage.save()
-        self.update_at = self.getDate()
+        self.updated_at = str(self.getDate())
     
     def to_dict(self):
         new_dict = self.__dict__
