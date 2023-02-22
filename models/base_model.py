@@ -1,8 +1,10 @@
 import uuid
 from datetime import datetime
 from models import storage
+date_now = datetime.now()
 class BaseModel:
     """ Classe base model """
+    
     def __init__(self, *args, **kwargs):
         if kwargs:
             for key, value in kwargs.items():
@@ -16,8 +18,9 @@ class BaseModel:
                     self.updated_at = datetime.fromisoformat(value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            
+            self.created_at = date_now
+            self.updated_at = date_now
             storage.new(self)
 
     def __str__(self):
@@ -25,7 +28,7 @@ class BaseModel:
     
     def save(self):
         storage.save()
-        self.updated_at = datetime.now()
+        self.updated_at = date_now
     
     def to_dict(self):
         new_dict = self.__dict__.copy()
