@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         elif line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
-            storage.new(base)
+            storage.save()
             print(base.id)
         else:
             print("** class doesn't exist **")
@@ -186,15 +186,47 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_update(self, line):
-        """_summary_
+        """help ? update <class_name> <id> <attribute name> "<attribute value>" """
+        ##################
+        #Check valid line#
+        ##################
+        if not line:
+            print("** class name missing **")
+            return
+        args = line.split()
+        if args[0] not in self.CLASSLIST:
+            print("** class doesn't exist **")
+            return
+        if len(args) <= 1:
+            print("** instance id missing **")
+            return
+        if len(args) <= 2:
+            print("** attribute name missing **")
+            return
+        if len(args) <= 3:
+            print("** value missing **")
+            return
+        #########################
+        #End check, start update#
+        #########################
 
-        Args:
-            line (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        return True
+        # Open storage and check id
+        find = False
+        data = storage.all().items()
+        for _, v in data:
+            ''' a (cls_name.id) v(obj) '''
+            v_dict = v.to_dict()
+            for _, value in v_dict.items():
+                if value == args[1]:
+                    find = True
+                    break
+        if not find:
+            print("** no instance found **")
+            return
+        setattr(v, args[2], args[3])
+        storage.new(v)
+        storage.save()
+        return
 
 if __name__ == '__main__':
     HBNBCommand(stdin=input).cmdloop()
