@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         elif line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
-            storage.new(base)
+            storage.save()
             print(base.id)
         else:
             print("** class doesn't exist **")
