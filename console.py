@@ -8,6 +8,7 @@ class HBNBCommand(cmd.Cmd):
     """Command processor HBNB."""
     # 
     prompt = '(hbnb) '
+    use_rawinput = True
     
     #
     CLASSLIST = ["BaseModel", "User"]
@@ -33,7 +34,8 @@ class HBNBCommand(cmd.Cmd):
         Returns:
             _type_: _description_
         """
-        return cmd.Cmd.emptyline(self)
+
+        return 0 #cmd.Cmd.emptyline(self)
     
     # Methode Commande
     def do_EOF(self, line):
