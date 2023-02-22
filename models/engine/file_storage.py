@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
+from datetime import datetime
 
 class FileStorage:
     """ FileStorage
@@ -14,25 +15,25 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        return self.__class__.__objects
+        return FileStorage.__objects
         
     def new(self, obj):
-        obj = obj.to_dict()
-        for k, o in obj.items():
-                if (not isinstance(o, str)):
-                    obj[k] = str(obj[k]) 
-                    
-        self.__class__.__objects["{}.{}".format(obj["__class__"], obj["id"])] = obj
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
         
     def save(self):
-        
-        with open(self.__class__.__file_path, "w", encoding="utf-8") as f:
-            json.dump(self.__class__.__objects, f)
-        f.close()
+        obj_to_dict = FileStorage.__objects.copy()
+        for key, obj in obj_to_dict.items():
+            obj_to_dict[key] = obj.to_dict()
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            json.dump(obj_to_dict, f)
 
     def reload(self):
-        if not os.path.exists(self.__class__.__file_path):
+        from models.base_model import BaseModel
+        if not os.path.exists(FileStorage.__file_path):
             return
-        with open(self.__class__.__file_path, "r", encoding="utf-8") as f:
-            self.__class__.__objects = json.load(f)
-        f.close()
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            big_dict = json.load(f)
+            for baseid, value in big_dict.items():
+                classe = value["__class__"]
+                obj = eval(classe)(**value)
+                self.new(obj)

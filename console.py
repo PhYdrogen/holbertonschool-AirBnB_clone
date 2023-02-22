@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Documentation for the console py """
+
 import cmd
 from models.base_model import BaseModel
 from models import storage
