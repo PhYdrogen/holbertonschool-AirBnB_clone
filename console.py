@@ -69,13 +69,13 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line (_type_): _description_
         """
-        if line and line in self.CLASSLIST:
+        if not line:
+            print("** class name missing **")
+        elif line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
             storage.new(base)
             print(base.id)
-        elif line is None:
-            print("** class name missing **")
         else:
             print("** class doesn't exist **")
 
