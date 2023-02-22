@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-""" He forgor skull emoji """
+""" Documentation for the console py """
+
 import cmd
-import sys
 from models.base_model import BaseModel
 from models import storage
 
@@ -9,6 +9,7 @@ class HBNBCommand(cmd.Cmd):
     """Command processor HBNB."""
     # 
     prompt = '(hbnb) '
+    use_rawinput = True
     
     #
     CLASSLIST = ["BaseModel", "User"]
@@ -34,8 +35,8 @@ class HBNBCommand(cmd.Cmd):
         Returns:
             _type_: _description_
         """
-        print ('emptyline()')
-        return cmd.Cmd.emptyline(self)
+
+        return 0 #cmd.Cmd.emptyline(self)
     
     # Methode Commande
     def do_EOF(self, line):
@@ -104,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
             line (_type_): _description_
         """
         args = self.parseline(line)
-        print(f"{args[0]}, {args[1]}")
+        #print(f"{args[0]}, {args[1]}")
         if args[0] and args[0] in self.CLASSLIST:
             if args[1]:
                 item = storage.all().get("{}.{}".format(args[0], args[1]), False)
