@@ -22,7 +22,6 @@ class HBNBCommand(cmd.Cmd):
         Returns:
             _type_: _description_
         """
-        print ('cmdloop(%s)' % intro)
         return cmd.Cmd.cmdloop(self, intro)
     
     # def preloop(self):
@@ -70,6 +69,7 @@ class HBNBCommand(cmd.Cmd):
         if line and line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
+            storage.new(base)
         elif line is None:
             print("** class name missing **")
         else:
