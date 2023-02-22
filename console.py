@@ -152,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if line and line in self.CLASSLIST:
             for k, item in storage.all().items():
-                if item.get("__class__", None) == line:
+                if item.to_dict().get("__class__", None) == line:
                     print(item)
         elif line:
             print("** class doesn't exist **")
