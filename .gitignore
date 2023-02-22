@@ -2,4 +2,6 @@ __pycache__/
 models/__pycache__
 *.py[cod]
 *$py.class
-0-main.py
+*-main.py
+main.sh
+test_*.py
