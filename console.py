@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Documentation for the console py """
 import cmd
+import sys
 from models.base_model import BaseModel
 from models import storage
 
@@ -71,6 +72,7 @@ class HBNBCommand(cmd.Cmd):
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
             storage.new(base)
+            print(base.id)
         elif line is None:
             print("** class name missing **")
         else:
@@ -165,7 +167,22 @@ class HBNBCommand(cmd.Cmd):
         Returns:
             _type_: _description_
         """
-        return True
+        args = self.parseline(line)
+        if args[0] and args[0] in self.CLASSLIST:
+            if args[1]:
+                items = storage.all()
+                item = items.get("{}.{}".format(args[0], args[1]), False)
+                if (item):
+                    del items["{}.{}".format(args[0], args[1])];
+                    storage.save()
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        elif args[0]:
+            print("** class doesn't exist **")
+        else:
+            print("** class name missing **")
 
     def do_update(self, line):
         """_summary_
@@ -179,4 +196,4 @@ class HBNBCommand(cmd.Cmd):
         return True
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    HBNBCommand(stdin=input).cmdloop()
