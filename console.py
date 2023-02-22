@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" He forgor skull emoji """
 import cmd
 import sys
 from models.base_model import BaseModel
