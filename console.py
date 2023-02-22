@@ -152,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if line and line in self.CLASSLIST:
             for k, item in storage.all().items():
-                if item.get("__class__", None) == line:
+                if item.to_dict().get("__class__", None) == line:
                     print(item)
         elif line:
             print("** class doesn't exist **")
@@ -214,19 +214,21 @@ class HBNBCommand(cmd.Cmd):
         find = False
         data = storage.all().items()
         for _, v in data:
-            ''' a (cls_name.id) v(obj) '''
-            v_dict = v.to_dict()
-            for _, value in v_dict.items():
-                if value == args[1]:
-                    find = True
-                    break
+            result = v.get("id")
+            if result == args[1]:
+                find = True
+                break
         if not find:
             print("** no instance found **")
             return
-        setattr(v, args[2], args[3])
-        storage.new(v)
+        #print(result) l'id de l'instance
+        obj_dict = v
+        print(obj_dict)
+        obj_dict[args[2]] = str(args[3])
         storage.save()
+
         return
+        return True
 
 if __name__ == '__main__':
     HBNBCommand(stdin=input).cmdloop()
