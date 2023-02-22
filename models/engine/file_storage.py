@@ -34,6 +34,8 @@ class FileStorage:
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
+        from models.state import State
+
         if not os.path.exists(self.__class__.__file_path):
             return
             
