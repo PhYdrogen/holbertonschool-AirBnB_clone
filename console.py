@@ -15,34 +15,79 @@ class HBNBCommand(cmd.Cmd):
     
     # Methode Obligatoire
     def cmdloop(self, intro=None):
-        print ('cmdloop(%s)' % intro)
+        """_summary_
+
+        Args:
+            intro (_type_, optional): _description_. Defaults to None.
+
+        Returns:
+            _type_: _description_
+        """
         return cmd.Cmd.cmdloop(self, intro)
     
     # def preloop(self):
     # def postloop(self):
         
     def emptyline(self):
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
         print ('emptyline()')
         return cmd.Cmd.emptyline(self)
     
     # Methode Commande
     def do_EOF(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         return True
     
     def do_quit(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         return True
     
     # Create Methode
     def do_create(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+        """
         if line and line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
+            storage.new(base)
         elif line is None:
             print("** class name missing **")
         else:
             print("** class doesn't exist **")
 
     def complete_create(self, text, line, begidx, endidx):
+        """_summary_
+
+        Args:
+            text (_type_): _description_
+            line (_type_): _description_
+            begidx (_type_): _description_
+            endidx (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         if not text:
             completions = self.CLASSLIST[:]
         else:
@@ -53,6 +98,11 @@ class HBNBCommand(cmd.Cmd):
         return completions
     # Show Methode
     def do_show(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+        """
         args = self.parseline(line)
         print(f"{args[0]}, {args[1]}")
         if args[0] and args[0] in self.CLASSLIST:
@@ -71,6 +121,17 @@ class HBNBCommand(cmd.Cmd):
         
 
     def complete_show(self, text, line, begidx, endidx):
+        """_summary_
+
+        Args:
+            text (_type_): _description_
+            line (_type_): _description_
+            begidx (_type_): _description_
+            endidx (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         if not text:
             completions = self.CLASSLIST[:]
         else:
@@ -81,6 +142,11 @@ class HBNBCommand(cmd.Cmd):
         return completions
     
     def do_all(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+        """
         if line and line in self.CLASSLIST:
             for k, item in storage.all().items():
                 if item.get("__class__", None) == line:
@@ -91,9 +157,25 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all())
     
     def do_destroy(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         return True
 
     def do_update(self, line):
+        """_summary_
+
+        Args:
+            line (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
         return True
 
 if __name__ == '__main__':
