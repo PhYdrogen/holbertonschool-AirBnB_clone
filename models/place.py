@@ -11,7 +11,7 @@ class Place(BaseModel):
     number_bathrooms = 0
     max_guest = 0
     price_by_night = 0
-    latitdue = 0.0
+    latitude = 0.0
     longitude = 0.0
     amenity_ids = []
     
@@ -26,6 +26,6 @@ class Place(BaseModel):
         self.number_bathrooms = kwargs.get("number_bathrooms",  0)
         self.max_guest = kwargs.get("max_guest",  0)
         self.price_by_night = kwargs.get("price_by_night",  0)
-        self.latitdue = kwargs.get("latitdue",  0.0)
+        self.latitude = kwargs.get("latitdue",  0.0)
         self.longitude = kwargs.get("longitude",  0.0)
         self.amenity_ids = kwargs.get("amenity_ids",  [])
