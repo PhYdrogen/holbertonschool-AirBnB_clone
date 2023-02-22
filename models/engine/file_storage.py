@@ -29,6 +29,11 @@ class FileStorage:
 
     def reload(self):
         from models.base_model import BaseModel
+        from models.user import User
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         if not os.path.exists(self.__class__.__file_path):
             return
             
