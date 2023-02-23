@@ -4,6 +4,12 @@
 import cmd
 import sys
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.state import State
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
@@ -13,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     use_rawinput = True
     
     #
-    CLASSLIST = ["BaseModel", "User"]
+    CLASSLIST = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
     
     # Methode Obligatoire
     def cmdloop(self, intro=None):
@@ -69,13 +75,13 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line (_type_): _description_
         """
-        if line and line in self.CLASSLIST:
+        if not line:
+            print("** class name missing **")
+        elif line in self.CLASSLIST:
             cls = eval(line) #getattr(sys.modules[__name__], line)
             base = cls()
-            storage.new(base)
+            storage.save()
             print(base.id)
-        elif line is None:
-            print("** class name missing **")
         else:
             print("** class doesn't exist **")
 
@@ -152,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if line and line in self.CLASSLIST:
             for k, item in storage.all().items():
-                if item.get("__class__", None) == line:
+                if item.to_dict().get("__class__", None) == line:
                     print(item)
         elif line:
             print("** class doesn't exist **")
@@ -186,15 +192,47 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_update(self, line):
-        """_summary_
+        """help ? update <class_name> <id> <attribute name> "<attribute value>" """
+        ##################
+        #Check valid line#
+        ##################
+        if not line:
+            print("** class name missing **")
+            return
+        args = line.split()
+        if args[0] not in self.CLASSLIST:
+            print("** class doesn't exist **")
+            return
+        if len(args) <= 1:
+            print("** instance id missing **")
+            return
+        if len(args) <= 2:
+            print("** attribute name missing **")
+            return
+        if len(args) <= 3:
+            print("** value missing **")
+            return
+        #########################
+        #End check, start update#
+        #########################
 
-        Args:
-            line (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        return True
+        # Open storage and check id
+        find = False
+        data = storage.all().items()
+        for _, v in data:
+            ''' a (cls_name.id) v(obj) '''
+            v_dict = v.to_dict()
+            for _, value in v_dict.items():
+                if value == args[1]:
+                    find = True
+                    break
+        if not find:
+            print("** no instance found **")
+            return
+        setattr(v, args[2], args[3])
+        storage.new(v)
+        storage.save()
+        return
 
 if __name__ == '__main__':
     HBNBCommand(stdin=input).cmdloop()
