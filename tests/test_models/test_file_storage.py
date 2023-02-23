@@ -1,49 +1,54 @@
 import unittest
-from models import storage
-from datetime import datetime
+from models.engine.file_storage import FileStorage
 import os
 
-class Testsorage(unittest.TestCase):
+class Teststorage(unittest.TestCase):
     
     def test_filepath(self):
-        self.assertTrue(storage.__file_path)
+        fs = FileStorage()
+        self.assertEqual(type(fs._FileStorage__file_path), str)
     
     def test_obj(self):
-        self.assertTrue(storage.__objects)
+        fs = FileStorage()
+        self.assertTrue(type(fs._FileStorage__objects), dict)
         
     def test_all(self):
-        self.assertEqual(type(storage.all()), dict)
+        fs = FileStorage()
+        self.assertEqual(type(fs.all()), dict)
         
     def test_new(self):
         from models.base_model import BaseModel
+        fs = FileStorage()
         item = BaseModel()
-        save_storage = storage.all()
-        storage.new(item)
-        self.assertFalse(save_storage == storage.all())
+        fs.new(item)
+        self.assertTrue(len(fs.all()) > 0)
 
     def test_save(self):
         from models.base_model import BaseModel
+        fs = FileStorage()
         item = BaseModel()
-        storage.new(item)
-        storage.save()
+        fs.new(item)
+        fs.save()
         
-        save_storage = storage.all()
-        storage.reload()
-        self.assertTrue(save_storage == storage.all())
+        save_storage = fs.all()
+        fs.reload()
+        self.assertTrue(save_storage == fs.all())
     
     def test_reload(self):
-        storage.reload()
-        self.assertTrue(os.path.exists(self.__class__.__file_path))
+        fs = FileStorage()
+        fs.reload()
+        self.assertTrue(os.path.exists(fs._FileStorage__file_path))
         
     def test_bmsave(self):
         from models.base_model import BaseModel
+        fs = FileStorage()
         item = BaseModel()
-        storage.new(item)
+        fs.new(item)
         item.save()
         
-        save_storage = storage.all()
-        storage.reload()
-        self.assertTrue(save_storage == storage.all())
+        save_storage = fs.all()
+        fs.reload()
+        self.assertTrue(save_storage == fs.all())
         
     def test_bminit(self):
         from models.base_model import BaseModel
