@@ -12,15 +12,17 @@ from models.review import Review
 from models.state import State
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Command processor HBNB."""
-    # 
+    #
     prompt = '(hbnb) '
     use_rawinput = True
-    
+
     #
-    CLASSLIST = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
-    
+    CLASSLIST = ["BaseModel", "User", "State",
+                 "City", "Amenity", "Place", "Review"]
+
     # Methode Obligatoire
     def cmdloop(self, intro=None):
         """_summary_
@@ -32,10 +34,10 @@ class HBNBCommand(cmd.Cmd):
             _type_: _description_
         """
         return cmd.Cmd.cmdloop(self, intro)
-    
+
     # def preloop(self):
     # def postloop(self):
-        
+
     def emptyline(self):
         """_summary_
 
@@ -43,8 +45,8 @@ class HBNBCommand(cmd.Cmd):
             _type_: _description_
         """
 
-        return 0 #cmd.Cmd.emptyline(self)
-    
+        return 0  # cmd.Cmd.emptyline(self)
+
     # Methode Commande
     def do_EOF(self, line):
         """_summary_
@@ -56,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             _type_: _description_
         """
         return True
-    
+
     def do_quit(self, line):
         """_summary_
 
@@ -67,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             _type_: _description_
         """
         return True
-    
+
     # Create Methode
     def do_create(self, line):
         """_summary_
@@ -78,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             print("** class name missing **")
         elif line in self.CLASSLIST:
-            cls = eval(line) #getattr(sys.modules[__name__], line)
+            cls = eval(line)  # getattr(sys.modules[__name__], line)
             base = cls()
             storage.save()
             print(base.id)
@@ -100,12 +102,13 @@ class HBNBCommand(cmd.Cmd):
         if not text:
             completions = self.CLASSLIST[:]
         else:
-            completions = [ f
-                            for f in self.CLASSLIST
-                            if f.startswith(text)
-                            ]
+            completions = [f
+                           for f in self.CLASSLIST
+                           if f.startswith(text)
+                           ]
         return completions
     # Show Methode
+
     def do_show(self, line):
         """_summary_
 
@@ -116,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
         #print(f"{args[0]}, {args[1]}")
         if args[0] and args[0] in self.CLASSLIST:
             if args[1]:
-                item = storage.all().get("{}.{}".format(args[0], args[1]), False)
+                item = storage.all().get(
+                    "{}.{}".format(args[0], args[1]), False)
                 if (item):
                     print(str(item))
                 else:
@@ -127,7 +131,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             print("** class name missing **")
-        
 
     def complete_show(self, text, line, begidx, endidx):
         """_summary_
@@ -144,12 +147,12 @@ class HBNBCommand(cmd.Cmd):
         if not text:
             completions = self.CLASSLIST[:]
         else:
-            completions = [ f
-                            for f in self.CLASSLIST
-                            if f.startswith(text)
-                            ]
+            completions = [f
+                           for f in self.CLASSLIST
+                           if f.startswith(text)
+                           ]
         return completions
-    
+
     def do_all(self, line):
         """_summary_
 
@@ -164,7 +167,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             print(storage.all())
-    
+
     def do_destroy(self, line):
         """_summary_
 
@@ -180,7 +183,7 @@ class HBNBCommand(cmd.Cmd):
                 items = storage.all()
                 item = items.get("{}.{}".format(args[0], args[1]), False)
                 if (item):
-                    del items["{}.{}".format(args[0], args[1])];
+                    del items["{}.{}".format(args[0], args[1])]
                     storage.save()
                 else:
                     print("** no instance found **")
@@ -194,7 +197,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, line):
         """help ? update <class_name> <id> <attribute name> "<attribute value>" """
         ##################
-        #Check valid line#
+        # Check valid line#
         ##################
         if not line:
             print("** class name missing **")
@@ -213,7 +216,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         #########################
-        #End check, start update#
+        # End check, start update#
         #########################
 
         # Open storage and check id
@@ -233,6 +236,7 @@ class HBNBCommand(cmd.Cmd):
         storage.new(v)
         storage.save()
         return
+
 
 if __name__ == '__main__':
     HBNBCommand(stdin=input).cmdloop()
