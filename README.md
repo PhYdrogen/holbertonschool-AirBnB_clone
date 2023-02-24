@@ -1,4 +1,4 @@
-# ![Hbnb](https://raw.githubusercontent.com/PhYdrogen/holbertonschool-AirBnB_clone/main/image/hbnb.png)
+# ![Hbnb](https://raw.githubusercontent.com/PhYdrogen/holbertonschool-AirBnB_clone/main/image/HolberBnb.png)
 
 
 ## 📑 DESCRIPTION
