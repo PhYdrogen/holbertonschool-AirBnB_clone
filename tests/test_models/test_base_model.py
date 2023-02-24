@@ -1,9 +1,15 @@
+import os
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 
 
 class Testbase(unittest.TestCase):
+
+    @classmethod
+    def tearDown(self):
+        if os.path.exists("file.json"):
+            os.remove("file.json")
 
     def test_id(self):
         md = BaseModel()
