@@ -48,7 +48,6 @@ class HBNBCommand(cmd.Cmd):
                 return super().precmd(line)
             if arr[0] in self.CLASSLIST:
                 # print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
-                
                 liste_input = arr[1].split('"', 2)  # inch ça pete pas
                 # print(liste_input)
                 fx = ""
@@ -304,7 +303,7 @@ update <class_name> <id> \
         arg_list = args[2]  # {'first_name': 'John', 'age': 89}
         try:
             dico = json.loads(arg_list)  # direct
-        except:
+        except json.decoder.JSONDecodeError:
             print(arg_list)
             arg_list = arg_list.replace("'", "*")
             # "{*first_name*: *John*, *age*: 89}"
@@ -323,7 +322,7 @@ update <class_name> <id> \
                 # print("Find")
                 for key, value in dico.items():
                     setattr(obj, key, value)
-                    return 
+                    return
         print("** no instance found **")
 
     def do_admin_count(self, line):
