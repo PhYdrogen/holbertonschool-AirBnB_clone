@@ -38,5 +38,5 @@ Holberton School - TOULOUSE - C19 Fev. 2023
 ----------------------
 ## 👦 Authors
 
-- [@RedginaldGodeau](https://github.com/RedginaldGodeau
+- [@RedginaldGodeau](https://github.com/RedginaldGodeau)
 - [@PhYdrogen](https://github.com/PhYdrogen)
