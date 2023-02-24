@@ -49,10 +49,17 @@ class HBNBCommand(cmd.Cmd):
             if arr[0] in self.CLASSLIST:
                 #print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
                 liste_input = arr[1].split('"')
+                fx = ""
+                if len(liste_input) > 3:
+                    attribute_name = liste_input[3:-1][0]
+                    attribute_value = liste_input[3:-1][2]
+                    fx = f" {attribute_name} {attribute_value}"
                 cmd_usr = liste_input[0][:-1]
                 cmd_id = liste_input[1]
                 if cmd_usr in ["show", "destroy", "update"]:
-                    line = f"{cmd_usr} {arr[0]} {cmd_id}"
+                    line = f"{cmd_usr} {arr[0]} {cmd_id}" + fx
+                    #print(f"exec : {line}")
+
                     return super().precmd(line)
 
 
@@ -265,6 +272,7 @@ update <class_name> <id> \
         if not find:
             print("** no instance found **")
             return
+        #print(f"obj : {v}, arg1 : {args[2]}, arg2 : {args[3]}")
         setattr(v, args[2], args[3])
         storage.new(v)
         storage.save()
