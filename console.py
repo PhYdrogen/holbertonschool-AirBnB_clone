@@ -35,6 +35,17 @@ class HBNBCommand(cmd.Cmd):
         """
         return cmd.Cmd.cmdloop(self, intro)
 
+    def precmd(self, line):
+        #print(f"precmd: {line}")
+        find = line.find('.')
+        if find > 3: # pas de classe à moins de 4 char
+            arr = line.split('.')
+            if arr[0] in self.CLASSLIST and arr[1] == 'all()':
+                line = f"all {arr[0]}"
+
+        #print(f"else: {line}")
+        return super().precmd(line)
+
     # def preloop(self):
     # def postloop(self):
 
