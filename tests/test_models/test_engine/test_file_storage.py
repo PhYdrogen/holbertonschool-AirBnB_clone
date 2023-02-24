@@ -75,14 +75,14 @@ class Teststorage_reload(unittest.TestCase):
 
         bm = BaseModel()
         storage.save()
+        old_len = len(storage.all())
         # écris dans le hdd
         storage.all().clear()
         # vide le dict
         storage.reload()
-        all_objs = storage.all()
-        for obj_id in all_objs.keys():
-            obj = all_objs[obj_id]
-            self.assertTrue(isinstance(obj, BaseModel))
+        new_len = len(storage.all())
+        self.assertEqual(old_len, new_len)
+        
 
 
 if __name__ == '__main__':
