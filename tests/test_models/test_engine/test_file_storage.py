@@ -52,9 +52,15 @@ class Teststorage(unittest.TestCase):
             self.assertTrue(isinstance(obj, BaseModel))
 
     def test_reload(self):
+        from models.base_model import BaseModel
         fs = FileStorage()
+        bm = BaseModel()
+        bm.save()
+        old_len = len(fs.all())
+        bm = BaseModel()
+        bm.save()
         fs.reload()
-        self.assertTrue(fs.all())
+        self.assertNotEqual(old_len, len(fs.all()))
 
     def test_bmsave(self):
         from models.base_model import BaseModel
