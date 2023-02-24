@@ -3,6 +3,7 @@ import json
 import os
 from datetime import datetime
 
+
 class FileStorage:
     """ FileStorage
     __init__
@@ -16,10 +17,11 @@ class FileStorage:
 
     def all(self):
         return FileStorage.__objects
-        
+
     def new(self, obj):
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
-        
+        FileStorage.__objects["{}.{}".format(
+            obj.__class__.__name__, obj.id)] = obj
+
     def save(self):
         obj_to_dict = FileStorage.__objects.copy()
         for key, obj in obj_to_dict.items():
@@ -38,7 +40,7 @@ class FileStorage:
 
         if not os.path.exists(self.__class__.__file_path):
             return
-            
+
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
             big_dict = json.load(f)
             for baseid, value in big_dict.items():
