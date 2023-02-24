@@ -9,7 +9,7 @@ class Teststorage(unittest.TestCase):
     def tearDown(self):
         if os.path.exists("file.json"):
             os.remove("file.json")
-    
+
     def test_filepath(self):
         fs = FileStorage()
         self.assertEqual(type(fs._FileStorage__file_path), str)
