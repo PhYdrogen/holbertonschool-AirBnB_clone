@@ -48,6 +48,7 @@ class HBNBCommand(cmd.Cmd):
                 return super().precmd(line)
             if arr[0] in self.CLASSLIST:
                 # print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
+                
                 liste_input = arr[1].split('"', 2)  # inch ça pete pas
                 # print(liste_input)
                 fx = ""
@@ -69,7 +70,10 @@ class HBNBCommand(cmd.Cmd):
                     attribute_value = liste_input[3:-1][2]
                     fx = f" {attribute_name} {attribute_value}"
                 cmd_usr = liste_input[0][:-1]
-                cmd_id = liste_input[1]
+                try:
+                    cmd_id = liste_input[1]
+                except IndexError:
+                    cmd_id = 0
 
                 if dico is not None and cmd_usr == "update":
                     line = f"update_as_dict {arr[0]} {cmd_id} {dico}"
@@ -298,22 +302,29 @@ update <class_name> <id> \
         c_name = args[0]  # classe_name
         c_id = args[1]  # classe_id
         arg_list = args[2]  # {'first_name': 'John', 'age': 89}
-        arg_list = arg_list.replace("'", "*")
-        # "{*first_name*: *John*, *age*: 89}"
-        arg_list = arg_list.replace("\"", "-")
-        # -{*first_name*: *John*, *age*: 89}-
-        arg_list = arg_list.replace("*", "\"")
-        # -{"first_name": "John", "age": 89}-
-        arg_list = arg_list.replace("-", "'")
-        # '{"first_name": "John", "age": 89}'
-        dico = json.loads(arg_list)  # classe_dict
+        try:
+            dico = json.loads(arg_list)  # direct
+        except:
+            print(arg_list)
+            arg_list = arg_list.replace("'", "*")
+            # "{*first_name*: *John*, *age*: 89}"
+            arg_list = arg_list.replace("\"", "-")
+            # -{*first_name*: *John*, *age*: 89}-
+            arg_list = arg_list.replace("*", "\"")
+            # -{"first_name": "John", "age": 89}-
+            arg_list = arg_list.replace("-", "'")
+            # '{"first_name": "John", "age": 89}
+            # print(arg_list)
+            # print(type(arg_list))
+            dico = json.loads(arg_list)  # classe_dict
 
         for key, obj in storage.all().items():
             if key == f"{c_name}.{c_id}":
                 # print("Find")
                 for key, value in dico.items():
                     setattr(obj, key, value)
-            # print("Not find")
+                    return 
+        print("** no instance found **")
 
     def do_admin_count(self, line):
         maj_class = []
