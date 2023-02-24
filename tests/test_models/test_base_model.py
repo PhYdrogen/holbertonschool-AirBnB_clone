@@ -30,6 +30,15 @@ class Testbase(unittest.TestCase):
         md = BaseModel()
         self.assertEqual(type(str(md)), str)
 
+    def test_to_dict(self):
+        bm = BaseModel()
+        bm.updated_at = datetime.utcnow()
+        d_json = bm.to_dict()
+        self.assertEqual(type(d_json), dict)
+        self.assertEqual(type(d_json['id']), str)
+        self.assertEqual(type(d_json['created_at']), str)
+        self.assertEqual(type(d_json['__class__']), str)
+        self.assertEqual(d_json['__class__'], "BaseModel")
 
 if __name__ == '__main__':
     unittest.main()
