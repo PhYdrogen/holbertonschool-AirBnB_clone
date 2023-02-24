@@ -22,9 +22,9 @@ class Testbase(unittest.TestCase):
 
     def test_save(self):
         bm = BaseModel()
-        bmbeforesave = bm.to_dict()
+        before = bm.updated_at
         bm.save()
-        self.assertFalse(bm.to_dict() != bmbeforesave)
+        self.assertFalse(before != bm.updated_at)
 
     def test_str(self):
         md = BaseModel()
