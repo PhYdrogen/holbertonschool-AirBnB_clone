@@ -48,12 +48,21 @@ class HBNBCommand(cmd.Cmd):
                 return super().precmd(line)
             if arr[0] in self.CLASSLIST:
                 # print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
-                liste_input = arr[1].split('"')
+                liste_input = arr[1].split('"', 2) # inch ça pete pas
                 # print(liste_input)
                 fx = ""
                 dico = None
                 if arr[1].find("{") != -1 and arr[1].find("}") != -1:
-                    dico = arr[1][arr[1].find("{"):arr[1].find("}")+1]
+                    if len(arr[1].split(",")) >= 3:
+                        # print(arr[1].split(","))
+                        # print("deux arg")
+                        dico = arr[1].split(",")[1] + "," + arr[1].split(",")[2]
+                        dico = dico[1:-1]
+                    else:
+                        # print("un arg")
+                        dico = arr[1].split(",")[1]
+                        dico = dico[1:-1]
+                    # print(type(dico))
                     dico = json.loads(dico)
                 if len(liste_input) > 3:
                     attribute_name = liste_input[3:-1][0]
