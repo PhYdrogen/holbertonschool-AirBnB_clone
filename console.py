@@ -160,13 +160,18 @@ class HBNBCommand(cmd.Cmd):
             line (_type_): _description_
         """
         if line and line in self.CLASSLIST:
-            for k, item in storage.all().items():
-                if item.to_dict().get("__class__", None) == line:
-                    print(item)
+            print("[\"" + ", "
+                  .join(str(item)
+                        for k, item in storage
+                        .all().items()
+                        if item.to_dict()
+                        .get("__class__", None) == line) + "\"]")
         elif line:
             print("** class doesn't exist **")
         else:
-            print(storage.all())
+            print("[\"" + ", ".join(str(item)
+                                    for k, item in storage
+                                    .all().items()) + "\"]")
 
     def do_destroy(self, line):
         """_summary_
