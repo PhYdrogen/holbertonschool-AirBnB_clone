@@ -116,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
             line (_type_): _description_
         """
         args = self.parseline(line)
-        #print(f"{args[0]}, {args[1]}")
+        # print(f"{args[0]}, {args[1]}")
         if args[0] and args[0] in self.CLASSLIST:
             if args[1]:
                 item = storage.all().get(
@@ -194,8 +194,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
+    def help_update(self):
+        print('help ? \
+update <class_name> <id> \
+<attribute name> <attribute value>')
+
     def do_update(self, line):
-        """help ? update <class_name> <id> <attribute name> "<attribute value>" """
         ##################
         # Check valid line#
         ##################
