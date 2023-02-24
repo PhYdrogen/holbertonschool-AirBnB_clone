@@ -43,8 +43,8 @@ class Teststorage(unittest.TestCase):
         if not os.path.exists("file.json"): # si il existe PAS sort une erreur
             self.assertTrue(False)
         self.assertTrue(before == bm.updated_at)
-        self.assertEqual(type(before), datetime)
-        self.assertEqual(type(bm.updated_at), datetime)
+        self.assertEqual(type(before), datetime.datetime)
+        self.assertEqual(type(bm.updated_at), datetime.datetime)
         fs.reload()
         all_obj_as_dict = fs.all()
         for key, obj in all_obj_as_dict.items():
