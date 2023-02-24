@@ -33,8 +33,9 @@ class Testbase(unittest.TestCase):
         self.assertTrue(before == bm.updated_at)
 
     def test_str(self):
-        md = BaseModel()
-        self.assertEqual(type(str(md)), str)
+        bm = BaseModel()
+        self.assertTrue(str(bm))
+        self.assertEqual(str(bm), "[{}] ({}) {}".format(bm.__class__.__name__, bm.id, bm.__dict__))
 
     def test_to_dict(self):
         bm = BaseModel()
