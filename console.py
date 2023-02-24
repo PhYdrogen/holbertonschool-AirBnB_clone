@@ -42,6 +42,8 @@ class HBNBCommand(cmd.Cmd):
             arr = line.split('.')
             if arr[0] in self.CLASSLIST and arr[1] == 'all()':
                 line = f"all {arr[0]}"
+            if arr[0] in self.CLASSLIST and arr[1] == 'count()':
+                line = f"admin_count {arr[0]}"
 
         #print(f"else: {line}")
         return super().precmd(line)
@@ -256,6 +258,13 @@ update <class_name> <id> \
         storage.new(v)
         storage.save()
         return
+
+    def do_admin_count(self, line):
+        maj_class = []
+        for classid, _ in storage.all().items():
+            tmp_list = classid.split('.')
+            maj_class.append(tmp_list[0])
+        print(maj_class.count(line))
 
 
 if __name__ == '__main__':
