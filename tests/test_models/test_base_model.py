@@ -1,6 +1,7 @@
 import os
 import unittest
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 from datetime import datetime
 
 
@@ -27,10 +28,24 @@ class Testbase(unittest.TestCase):
         self.assertTrue(isinstance(md.created_at, datetime))
 
     def test_save(self):
+        fs = FileStorage()
+        fs.reload()
+        if os.path.exists("file.json"): # si il existe sort une erreur
+            self.assertTrue(False)
+
         bm = BaseModel()
         before = bm.updated_at
         bm.save()
+        if not os.path.exists("file.json"): # si il existe PAS sort une erreur
+            self.assertTrue(False)
         self.assertTrue(before == bm.updated_at)
+        self.assertEqual(type(before), datetime)
+        self.assertEqual(type(bm.updated_at), datetime)
+        fs.reload()
+        all_obj_as_dict = fs.all()
+        for key, obj in all_obj_as_dict.items():
+            self.assertEqual(key, "{}.{}".format(obj.__class__.__name__, obj.id))
+            self.assertTrue(isinstance(obj, BaseModel))
 
     def test_str(self):
         bm = BaseModel()
