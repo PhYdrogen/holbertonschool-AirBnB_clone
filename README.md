@@ -29,7 +29,7 @@ This Python Script is based on a JSON file that serves as a database. It allows 
 | `create *[Model]` | Adding Element in json file.
 | `destroy *[ID]` | Deleting Element in json file. 
 | `update` *[ID] *(attr...)| Updating Element in json file.
-----------------------
+
 *REQUIRED
 
 ----------------------
