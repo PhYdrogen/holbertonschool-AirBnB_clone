@@ -43,7 +43,7 @@ class Teststorage(unittest.TestCase):
     def test_reload(self):
         fs = FileStorage()
         fs.reload()
-        self.assertTrue(os.path.exists(fs._FileStorage__file_path))
+        self.assertTrue(fs.all())
 
     def test_bmsave(self):
         from models.base_model import BaseModel

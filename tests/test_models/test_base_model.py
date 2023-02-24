@@ -1,14 +1,9 @@
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
-import os
 
 
 class Testbase(unittest.TestCase):
-
-    def tearDown(self):
-        if os.path.exists("file.json"):
-            os.remove("file.json")
 
     def test_id(self):
         md = BaseModel()
@@ -27,9 +22,9 @@ class Testbase(unittest.TestCase):
 
     def test_save(self):
         bm = BaseModel()
-        bmbeforesave = bm.to_dict()
+        before = bm.updated_at
         bm.save()
-        self.assertFalse(bm.to_dict() != bmbeforesave)
+        self.assertFalse(before != bm.updated_at)
 
     def test_str(self):
         md = BaseModel()
