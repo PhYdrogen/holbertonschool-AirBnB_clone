@@ -44,6 +44,9 @@ class HBNBCommand(cmd.Cmd):
                 line = f"all {arr[0]}"
             if arr[0] in self.CLASSLIST and arr[1] == 'count()':
                 line = f"admin_count {arr[0]}"
+            if arr[0] in self.CLASSLIST:
+                cmd_id = arr[1].split('"')[1]
+                line = f"show {arr[0]} {cmd_id}"
 
         #print(f"else: {line}")
         return super().precmd(line)
