@@ -4,12 +4,10 @@ from models.city import City
 class Testbase(unittest.TestCase):
     
     def test_name(self):
-        City.name = "Toulouse"
-        self.assertEqual(City.name, "Toulouse")
+        self.assertEqual(type(City.name), str)
     
     def test_sid(self):
-        City.state_id = "0001"
-        self.assertEqual(City.state_id, "0001")
+        self.assertEqual(type(City.state_id), str)
 
 if __name__ == '__main__':
     unittest.main()
