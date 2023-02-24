@@ -24,7 +24,7 @@ class Testbase(unittest.TestCase):
         bm = BaseModel()
         before = bm.updated_at
         bm.save()
-        self.assertFalse(before != bm.updated_at)
+        self.assertTrue(before == bm.updated_at)
 
     def test_str(self):
         md = BaseModel()
