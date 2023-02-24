@@ -42,11 +42,19 @@ class HBNBCommand(cmd.Cmd):
             arr = line.split('.')
             if arr[0] in self.CLASSLIST and arr[1] == 'all()':
                 line = f"all {arr[0]}"
+                return super().precmd(line)
             if arr[0] in self.CLASSLIST and arr[1] == 'count()':
                 line = f"admin_count {arr[0]}"
+                return super().precmd(line)
             if arr[0] in self.CLASSLIST:
-                cmd_id = arr[1].split('"')[1]
-                line = f"show {arr[0]} {cmd_id}"
+                #print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
+                liste_input = arr[1].split('"')
+                cmd_usr = liste_input[0][:-1]
+                cmd_id = liste_input[1]
+                if cmd_usr in ["show", "destroy", "update"]:
+                    line = f"{cmd_usr} {arr[0]} {cmd_id}"
+                    return super().precmd(line)
+
 
         #print(f"else: {line}")
         return super().precmd(line)
