@@ -194,8 +194,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
+    def help_update(self):
+        print('\n'.join(['help ?',
+                         'update <class_name> <id> <attribute name> <attribute value>']))
+
     def do_update(self, line):
-        """help ? update <class_name> <id> <attribute name> "<attribute value>" """
         ##################
         # Check valid line#
         ##################
