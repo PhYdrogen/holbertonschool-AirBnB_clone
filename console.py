@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Documentation for the console py """
-
+import json 
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -49,17 +49,28 @@ class HBNBCommand(cmd.Cmd):
             if arr[0] in self.CLASSLIST:
                 #print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
                 liste_input = arr[1].split('"')
+                #print(liste_input)
                 fx = ""
+                dico = None
+                if arr[1].find("{") != -1 and arr[1].find("}") != -1:
+                    dico = arr[1][arr[1].find("{"):arr[1].find("}")+1]
+                    dico = json.loads(dico)
                 if len(liste_input) > 3:
                     attribute_name = liste_input[3:-1][0]
                     attribute_value = liste_input[3:-1][2]
                     fx = f" {attribute_name} {attribute_value}"
                 cmd_usr = liste_input[0][:-1]
                 cmd_id = liste_input[1]
-                if cmd_usr in ["show", "destroy", "update"]:
-                    line = f"{cmd_usr} {arr[0]} {cmd_id}" + fx
-                    #print(f"exec : {line}")
 
+
+                if dico is not None and cmd_usr == "update":
+                    line = f"update_as_dict {arr[0]} {cmd_id} {dico}" # arr[0] == classe
+                    return super().precmd(line)
+                
+
+                if cmd_usr in ["show", "destroy", "update"]:
+                    line = f"{cmd_usr} {arr[0]} {cmd_id}" + fx # arr[0] == classe
+                    #print(f"exec : {line}")
                     return super().precmd(line)
 
 
@@ -277,6 +288,26 @@ update <class_name> <id> \
         storage.new(v)
         storage.save()
         return
+
+    def do_update_as_dict(self, line):
+        args = line.split(None, 2)
+        c_name = args[0] # classe_name
+        c_id = args[1] # classe_id
+        arg_list = args[2] # {'first_name': 'John', 'age': 89}
+        arg_list = arg_list.replace("'", "*") # "{*first_name*: *John*, *age*: 89}"
+        arg_list = arg_list.replace("\"", "-") # -{*first_name*: *John*, *age*: 89}-
+        arg_list = arg_list.replace("*", "\"") # -{"first_name": "John", "age": 89}-
+        arg_list = arg_list.replace("-", "'") # '{"first_name": "John", "age": 89}'
+        dico = json.loads(arg_list) # classe_dict
+
+        for key, obj in storage.all().items():
+            if key == f"{c_name}.{c_id}":
+                #print("Find")
+                for key, value in dico.items():
+                    setattr(obj, key, value)
+            #print("Not find")
+
+
 
     def do_admin_count(self, line):
         maj_class = []
