@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
                         dico = arr[1].split(",")[1]
                         dico = dico[1:-1]
                     # print(type(dico))
-                    dico = json.loads(dico)
+                    # dico = json.loads(dico)
                 if len(liste_input) > 3:
                     attribute_name = liste_input[3:-1][0]
                     attribute_value = liste_input[3:-1][2]
