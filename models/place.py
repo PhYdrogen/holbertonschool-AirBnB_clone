@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
-    
+
     city_id = ""
     user_id = ""
     name = ""
@@ -14,10 +15,10 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         self.city_id = kwargs.get("state_id",  "")
         self.user_id = kwargs.get("user_id",  "")
         self.name = kwargs.get("name",  "")
