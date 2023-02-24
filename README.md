@@ -2,7 +2,7 @@
 
 
 ## 📑 DESCRIPTION
-
+This Python Script is based on a JSON file that serves as a database. It allows storing objects belonging to six different classes: "User", "State", "City", "Amenity", "Place", and "Review". The backend can be used with an interactive console that provides several commands for creating, modifying, displaying, and deleting objects from these classes.
 
 ----------------------
 ## 🔧 Tech Stack
