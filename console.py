@@ -304,7 +304,7 @@ update <class_name> <id> \
         try:
             dico = json.loads(arg_list)  # direct
         except json.decoder.JSONDecodeError:
-            print(arg_list)
+            # print(arg_list)
             arg_list = arg_list.replace("'", "*")
             # "{*first_name*: *John*, *age*: 89}"
             arg_list = arg_list.replace("\"", "-")
@@ -322,7 +322,7 @@ update <class_name> <id> \
                 # print("Find")
                 for key, value in dico.items():
                     setattr(obj, key, value)
-                    return
+                return
         print("** no instance found **")
 
     def do_admin_count(self, line):
