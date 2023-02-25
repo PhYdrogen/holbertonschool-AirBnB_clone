@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
                 return super().precmd(line)
             if arr[0] in self.CLASSLIST:
                 # print(f"elm 1 : {arr[0]}, elm 2 : {arr[1]}")
-                liste_input = arr[1].split('"', 2)  # inch ça pete pas
+                liste_input = arr[1].split('"')  # inch ça pete pas
                 # print(liste_input)
                 fx = ""
                 dico = None
