@@ -4,6 +4,8 @@
 ## 📑 DESCRIPTION
 This Python Script is based on a JSON file that serves as a database. It allows storing objects belonging to six different classes: "User", "State", "City", "Amenity", "Place", and "Review". The backend can be used with an interactive console that provides several commands for creating, modifying, displaying, and deleting objects from these classes.
 
+## 🤖 DEMO
+![GIF](https://raw.githubusercontent.com/PhYdrogen/holbertonschool-AirBnB_clone/main/image/console%20demo.gif)
 ----------------------
 ## 🔧 Tech Stack
 
@@ -34,9 +36,12 @@ This Python Script is based on a JSON file that serves as a database. It allows 
 
 *REQUIRED
 
+### Flowchart :
+![basemodel](https://github.com/PhYdrogen/holbertonschool-AirBnB_clone/blob/main/image/BaseModel-flowchart.png)
+![console](https://github.com/PhYdrogen/holbertonschool-AirBnB_clone/blob/main/image/Console-flowchart.png)
 ----------------------
 ### 🎓  SCHOOL :
-Holberton School - TOULOUSE - C19 Fev. 2023
+- Holberton School - TOULOUSE - C19 Fev. 2023
 ----------------------
 ## 👦 Authors
 
