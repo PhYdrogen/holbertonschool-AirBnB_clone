@@ -4,6 +4,8 @@ header {
     width: 100%;
     border-bottom: 1px solid;
     border-bottom-color: #CCCC;
+    display: flex;
+    align-items: center;
 }
 header img {
     padding-left: 20px;
