@@ -24,17 +24,23 @@ button {
 button:hover {
     opacity: 90%;
 }
+ul.popover {
+    padding-right: 20%;
+}
 .popover {
+    padding: 0px;
     margin: 0px;
     list-style: none;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 .popover li {
-    padding: 5px;
-    margin-left: 10px;
+    margin-left: 50px;
+    padding-top: 7px;
 }
 .popover li h2 {
-    margin-bottom: 0px;
+    padding-top: 20px;
+    margin: 0;
+    margin-left: -20px;
 }
 .locations {
     width: 25%;
@@ -61,18 +67,14 @@ button:hover {
     height: 100%;
 }
 .locations:hover .popover {
-    margin: 0px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 0px 0px 40px 0px;
     visibility: visible;
     background-color: #FAFAFA;
     border:1px solid #DDDDDD;
     border-radius: 4px;
 }
 .amenities:hover .popover {
-    margin: 0px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 15px 0px 40px 0px;
     visibility: visible;
     background-color: #FAFAFA;
     border:1px solid #DDDDDD;
