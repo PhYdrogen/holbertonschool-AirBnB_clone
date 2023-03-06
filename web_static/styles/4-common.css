@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+}
+.container {
+    min-width: 1000px;
+    max-width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.filters {
+    color: #ffff;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    justify-content: right;
+    padding-right: 30px;
+    align-items: center;
+}
+button {
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #FFFF;
+    height: 48px;
+    width: 20%;
+    border: none;
+    border-radius: 4px;
+}
+button:hover {
+    opacity: 90%;
+}
