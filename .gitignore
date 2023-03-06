@@ -6,3 +6,4 @@ models/__pycache__
 main.sh
 file.json
 test.py
+web_static/w3c.py
