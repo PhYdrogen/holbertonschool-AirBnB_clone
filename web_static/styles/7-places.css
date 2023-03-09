@@ -9,10 +9,6 @@
 .places {
     margin-top: 0px;
 }
-.filters:hover + .places {
-    margin-top: 225px;
-    /* Permet de se decaler un peu en dessous */
-}
 .places h1 {
     font-size: 30px;
 }
