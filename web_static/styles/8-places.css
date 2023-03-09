@@ -1,3 +1,23 @@
+.image_room {
+    background-image: url("../images/icon_bed.png");
+    background-size:100%;
+    width: 50px;
+    height: 50px;
+}
+
+.image_group {
+    background-image: url("../images/icon_group.png");
+    background-size:100%;
+    width: 50px;
+    height: 50px;
+}
+
+.image_bath {
+    background-image: url("../images/icon_bath.png");
+    background-size:100%;
+    width: 50px;
+    height: 50px;
+}
 .places_items {
     display: flex;
     flex-wrap: wrap;
@@ -56,14 +76,23 @@
     margin:0px;
 }
 div.number_bathrooms {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100px;
     text-align: center;
 }
 div.max_guest {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100px;
     text-align: center;
 }
 div.number_rooms {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100px;
     text-align: center;
 }

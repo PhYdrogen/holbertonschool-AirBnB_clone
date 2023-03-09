@@ -46,6 +46,7 @@ ul.popover {
     width: 25%;
     height: 100%;
     border-right: 1px solid #DDDDDD;
+    position: relative;
 }
 .locations h3, .amenities h3 {
     margin-left: 20%;
@@ -65,6 +66,7 @@ ul.popover {
     margin-right: 30%;
     width: 25%;
     height: 100%;
+    position: relative;
 }
 .locations:hover .popover {
     padding: 0px 0px 40px 0px;
